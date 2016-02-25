@@ -1,0 +1,19 @@
+{
+  "ecmaFeatures": {
+    "jsx": true,
+    "modules": true
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "mocha": true,
+    "es6": true
+  },
+  "parser": "babel-eslint",
+  "extends": [ "standard", "standard-react" ],
+  "plugins": [
+    "babel",
+    "react",
+    "standard"
+  ]
+}
