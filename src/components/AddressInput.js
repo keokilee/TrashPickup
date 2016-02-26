@@ -27,6 +27,9 @@ export default class AddressInput extends React.Component {
         currentLocation
         currentLocationLabel='Current Location'
         nearbyPlacesAPI='GoogleReverseGeocoding'
+        GoogleReverseGeocodingQuery={{
+          result_type: 'street_address'
+        }}
         enablePoweredByContainer={false}
       />
     )

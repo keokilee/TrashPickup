@@ -6,7 +6,6 @@ import React, {
   Text
 } from 'react-native'
 import { connect } from 'react-redux'
-import { Actions } from 'react-native-router-flux'
 
 import { setLocation } from '../actions'
 import AddressInput from '../components/AddressInput'
@@ -15,8 +14,6 @@ class TrashPickup extends Component {
   onChangeLocation = (location, details) => {
     const { dispatch } = this.props
     dispatch(setLocation(location, details))
-    Actions.timers()
-    // TODO: Navigate to timer view
   };
 
   render () {

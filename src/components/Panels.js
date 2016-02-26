@@ -1,16 +1,47 @@
 import React, { StyleSheet, PropTypes, View, Text } from 'react-native'
+import moment from 'moment'
 
 class Panel extends React.Component {
+  timerLabel () {
+    const { pickupDate } = this.props
+    const today = moment()
+    if (moment(pickupDate).isSame(today, 'day')) {
+      return 'Today'
+    }
+
+    const diff = Math.abs(today.diff(pickupDate, 'days')) + 1
+    if (diff === 1) {
+      return '1 day'
+    }
+
+    return `${diff} days`
+  }
+
+  nextLabel () {
+    const { pickupDate } = this.props
+    const today = moment()
+
+    if (moment(pickupDate).isSame(today, 'day')) {
+      return ''
+    }
+
+    const diff = Math.abs(today.diff(pickupDate, 'days')) + 1
+    if (diff === 1) {
+      return 'Next pickup is tomorrow'
+    }
+
+    return `Next pickup is ${moment(pickupDate).format('dddd, MMMM Do')}`
+  }
+
   render () {
     const { panelStyle, panelTitle } = this.props
-    console.log(panelStyle)
     const panelStyles = [styles.panel, panelStyle]
 
     return (
       <View style={panelStyles}>
         <Text style={[ styles.panelText, styles.panelHeader ]}>{panelTitle}</Text>
-        <Text style={[ styles.panelText, styles.panelTimer ]}>3 days</Text>
-        <Text style={[ styles.panelText, styles.panelDetail ]}>Next pickup is on Tuesday</Text>
+        <Text style={[ styles.panelText, styles.panelTimer ]}>{this.timerLabel()}</Text>
+        <Text style={[ styles.panelText, styles.panelDetail ]}>{this.nextLabel()}</Text>
       </View>
     )
   }
@@ -18,30 +49,31 @@ class Panel extends React.Component {
 
 Panel.propTypes = {
   panelStyle: PropTypes.number,
+  pickupDate: PropTypes.object.isRequired,
   panelTitle: PropTypes.string.isRequired
 }
 
 export function RegularPanel (props) {
   return (
-    <Panel panelTitle='Regular' />
+    <Panel panelTitle='Regular' {...props} />
   )
 }
 
 export function RecyclingPanel (props) {
   return (
-    <Panel panelStyle={styles.recyclingPanel} panelTitle='Recycling' />
+    <Panel panelStyle={styles.recyclingPanel} panelTitle='Recycling' {...props} />
   )
 }
 
 export function GreenWastePanel (props) {
   return (
-    <Panel panelStyle={styles.greenWastePanel} panelTitle='Green Waste' />
+    <Panel panelStyle={styles.greenWastePanel} panelTitle='Green Waste' {...props} />
   )
 }
 
 export function BulkyItemPanel (props) {
   return (
-    <Panel panelTitle='Bulky Items' />
+    <Panel panelTitle='Bulky Items' {...props} />
   )
 }
 
