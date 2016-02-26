@@ -11,8 +11,8 @@ export default class AppRouter extends React.Component {
   render () {
     return (
       <Router hideNavBar>
-        <Route name='locationSearch' initial component={AddressEntry} />
-        <Route name='timers' component={PickupTimers} />
+        <Route name='locationSearch' component={AddressEntry} />
+        <Route name='timers' initial component={PickupTimers} />
       </Router>
     )
   }
