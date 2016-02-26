@@ -5,21 +5,18 @@
 import React, { Component } from 'react-native'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
-import { Router, Route } from 'react-native-router-flux'
-
-import TrashPickup from './TrashPickup'
+import devTools from 'remote-redux-devtools'
 
 import reducers from '../reducers'
+import Router from '../router'
 
-const store = createStore(reducers)
+const store = createStore(reducers, {}, devTools({name: 'Trash Pickup'}))
 
 class Root extends Component {
   render () {
     return (
       <Provider hideNavBar store={store}>
-        <Router>
-          <Route name='locationSearch' initial component={TrashPickup} title='Select Location' />
-        </Router>
+        <Router />
       </Provider>
     )
   }

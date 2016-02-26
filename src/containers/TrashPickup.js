@@ -1,31 +1,31 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- */
 import React, {
   Component,
   PropTypes,
   StyleSheet,
-  View
+  View,
+  Text
 } from 'react-native'
-
 import { connect } from 'react-redux'
+import { Actions } from 'react-native-router-flux'
 
 import { setLocation } from '../actions'
 import AddressInput from '../components/AddressInput'
 
 class TrashPickup extends Component {
-  onChangeLocation (location) {
+  onChangeLocation = (location, details) => {
     const { dispatch } = this.props
-
+    dispatch(setLocation(location, details))
+    Actions.timers()
     // TODO: Navigate to timer view
-    dispatch(setLocation(location))
-  }
+  };
 
   render () {
     return (
       <View style={styles.container}>
         <AddressInput onChangeLocation={this.onChangeLocation} />
+        <View style={styles.welcomeContainer}>
+          <Text>Welcome to Trash Pickup! Start by entering your home address.</Text>
+        </View>
       </View>
     )
   }
@@ -37,7 +37,13 @@ TrashPickup.propTypes = {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 10
+    flex: 1,
+    marginTop: 20,
+    justifyContent: 'center'
+  },
+  welcomeContainer: {
+    flex: 1,
+    alignItems: 'center'
   }
 })
 

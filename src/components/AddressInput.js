@@ -1,41 +1,38 @@
-import React from 'react-native'
+import React, { PropTypes } from 'react-native'
 
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete'
 
 import secrets from '../../secrets.json'
 
 export default class AddressInput extends React.Component {
-  onPress (data, details = null) {
-    console.log(data)
-    console.log(details)
-  }
-
   render () {
-    const getDefaultValue = () => ''
-
     return (
       <GooglePlacesAutocomplete
-        placeholder='Search'
+        placeholder='Enter your home address'
         minLength={3}
         fetchDetails
-        onPress={this.onPress}
-        getDefaultValue={getDefaultValue}
+        onPress={this.props.onChangeLocation}
         query={{
           key: secrets.GOOGLE_PLACES_API_KEY,
-          language: 'en'
+          language: 'en',
+          types: 'address'
         }}
         styles={{
-          description: {
-            fontWeight: 'bold'
-          },
-          predefinedPlacesDescription: {
-            color: '#1faadb'
+          textInputContainer: {
+            backgroundColor: 'white',
+            borderBottomWidth: 1,
+            borderBottomColor: '#4CAF50'
           }
         }}
         currentLocation
         currentLocationLabel='Current Location'
-        nearbyPlacesAPI='GooglePlacesSearch'
+        nearbyPlacesAPI='GoogleReverseGeocoding'
+        enablePoweredByContainer={false}
       />
     )
   }
+}
+
+AddressInput.propTypes = {
+  onChangeLocation: PropTypes.func
 }
