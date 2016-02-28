@@ -8,12 +8,9 @@ import { SET_LOCATION, setRoutes, fetchingRoutes } from './actions'
 function * queryRoutes ({ payload }) {
   yield put(fetchingRoutes())
 
-  const [ refuseResult, bulkyResult ] = yield [
-    call(client.refuse, payload.details.geometry.location),
-    call(client.bulky, payload.details.geometry.location)
-  ]
+  const refuseResult = yield call(client.refuse, payload.details.geometry.location)
 
-  yield put(setRoutes(refuseResult, bulkyResult))
+  yield put(setRoutes(refuseResult))
   yield Actions.timers()
 }
 

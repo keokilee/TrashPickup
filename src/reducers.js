@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
 
-import { SET_LOCATION, SET_ROUTES, FETCH_RESULTS } from './actions'
+import { SET_LOCATION, SET_ROUTES } from './actions'
 
 function location (state = {}, { type, payload }) {
   switch (type) {
@@ -20,7 +20,7 @@ function location (state = {}, { type, payload }) {
 function pickupDays (state = {}, { type, payload }) {
   switch (type) {
     case SET_ROUTES:
-      const { refuse, bulky } = payload
+      const { refuse } = payload
       return {
         loading: false,
         district: refuse.DISTRICT,
@@ -28,9 +28,9 @@ function pickupDays (state = {}, { type, payload }) {
         calendar: refuse.CALENDAR,
         pickupDay: refuse.DAY_,
         recycleDay: refuse.RECYCLE_DA,
-        bulkySector: bulky.SECTOR,
-        bulkyCalendar: bulky.CALENDAR,
-        bulkyDay: bulky.RTE_DAY
+        bulkySector: refuse.SECTOR,
+        bulkyCalendar: refuse.CALENDAR_1,
+        bulkyDay: refuse.RTE_DAY
       }
     default:
       return state

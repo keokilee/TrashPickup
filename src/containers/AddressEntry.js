@@ -8,6 +8,7 @@ import React, {
 import { connect } from 'react-redux'
 
 import { setLocation } from '../actions'
+import globalStyles from './globalStyles'
 import AddressInput from '../components/AddressInput'
 
 class TrashPickup extends Component {
@@ -18,10 +19,15 @@ class TrashPickup extends Component {
 
   render () {
     return (
-      <View style={styles.container}>
+      <View style={globalStyles.container}>
         <AddressInput onChangeLocation={this.onChangeLocation} />
         <View style={styles.welcomeContainer}>
-          <Text>Welcome to Trash Pickup! Start by entering your home address.</Text>
+          <Text style={[globalStyles.header, styles.welcomeHeader]}>
+            Opala
+          </Text>
+          <Text style={styles.welcomeSubheader}>
+            Find the trash collection pickup times in your neighborhood. Start by entering your address
+          </Text>
         </View>
       </View>
     )
@@ -33,14 +39,18 @@ TrashPickup.propTypes = {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    marginTop: 20,
-    justifyContent: 'center'
-  },
   welcomeContainer: {
     flex: 1,
-    alignItems: 'center'
+    padding: 20
+  },
+  welcomeHeader: {
+    color: 'white',
+    textAlign: 'center'
+  },
+  welcomeSubheader: {
+    color: 'white',
+    marginTop: 10,
+    fontSize: 20
   }
 })
 

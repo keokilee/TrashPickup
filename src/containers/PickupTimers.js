@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import moment from 'moment'
 
 import { RegularPanel, RecyclingPanel, GreenWastePanel, BulkyItemPanel } from '../components/Panels'
+import globalStyles from './globalStyles'
+
 class PickupTimers extends React.Component {
   nextBulkyPickupDate (day) {
     const today = moment()
@@ -19,6 +21,10 @@ class PickupTimers extends React.Component {
   }
 
   nextPickupDate (day) {
+    if (day === ' ') {
+      return null
+    }
+
     const today = moment()
     let nextDate = moment().day(day)
 
@@ -56,13 +62,10 @@ class PickupTimers extends React.Component {
     const { formatted_address } = this.props
 
     return (
-      <View style={styles.container}>
+      <View style={globalStyles.container}>
         {this.createPanels().map(([Panel, date], index) =>
           <Panel pickupDate={date} key={`panel${index}`} />
         )}
-        <View style={styles.addressContainer}>
-          <Text style={styles.address}>Pickup Times for {formatted_address}</Text>
-        </View>
       </View>
     )
   }
@@ -76,15 +79,12 @@ PickupTimers.propTypes = {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    marginTop: 20,
-    justifyContent: 'center'
-  },
-
   addressContainer: {
     flex: 1,
     padding: 10
+  },
+  address: {
+    color: 'white'
   }
 })
 

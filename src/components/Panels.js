@@ -4,6 +4,10 @@ import moment from 'moment'
 class Panel extends React.Component {
   timerLabel () {
     const { pickupDate } = this.props
+    if (!pickupDate) {
+      return 'No information available'
+    }
+
     const today = moment()
     if (moment(pickupDate).isSame(today, 'day')) {
       return 'Today'
@@ -19,6 +23,10 @@ class Panel extends React.Component {
 
   nextLabel () {
     const { pickupDate } = this.props
+    if (!pickupDate) {
+      return ''
+    }
+
     const today = moment()
 
     if (moment(pickupDate).isSame(today, 'day')) {
@@ -49,7 +57,7 @@ class Panel extends React.Component {
 
 Panel.propTypes = {
   panelStyle: PropTypes.number,
-  pickupDate: PropTypes.object.isRequired,
+  pickupDate: PropTypes.object,
   panelTitle: PropTypes.string.isRequired
 }
 

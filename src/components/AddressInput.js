@@ -19,9 +19,10 @@ export default class AddressInput extends React.Component {
         }}
         styles={{
           textInputContainer: {
-            backgroundColor: 'white',
-            borderBottomWidth: 1,
-            borderBottomColor: '#4CAF50'
+            backgroundColor: 'white'
+          },
+          row: {
+            backgroundColor: 'white'
           }
         }}
         currentLocation

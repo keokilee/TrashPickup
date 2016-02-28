@@ -43,6 +43,7 @@ export function refuse ({ lng, lat }) {
         return null
       }
 
+      console.log(body.features)
       return body.features[0].attributes
     })
 }
